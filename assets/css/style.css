@@ -1,0 +1,22 @@
+#lottie-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #8E0FE8;
+    z-index: -1;
+}
+
+.ui {
+    text-align: center;
+    width: 100%;
+    height: 100vh;
+
+    display: grid;
+    grid-template-columns: 1fr 50% 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-content: center;
+}
