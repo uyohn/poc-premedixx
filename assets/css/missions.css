@@ -1,0 +1,53 @@
+.missions {
+
+}
+
+.about {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    color: #8e0fe8;
+    padding: 20px;
+}
+
+.about .play-icon {
+    width: 80px;
+    margin-bottom: 20px;
+}
+
+.about .mission {
+    text-align: center;
+    font-size: 1.8em;
+    max-width: 40em;
+    margin: 0 auto;
+}
+
+.about .cta {
+    font-size: 1em;
+    margin-top: 40px;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    color: inherit;
+
+    display: flex;
+    align-items: center;
+}
+
+.about .cta img {
+    margin-left: 10px;
+    height: 1em;
+}
+
+.about .slogan {
+    font-size: 1.5em;
+    font-style: italic;
+    align-self: flex-end;
+    margin-right: 10%;
+}
+
+.about .team-pic {
+    min-width: 600px;
+    width: 80%;
+    max-width: 1400px;    
+}

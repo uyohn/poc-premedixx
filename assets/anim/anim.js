@@ -1,4 +1,5 @@
 const lottieContainer = document.getElementById('lottie-container')
+const body = document.getElementsByTagName("BODY")[0];
 
 // load the animation
 const anim = lottie.loadAnimation({
@@ -12,7 +13,7 @@ const anim = lottie.loadAnimation({
 
 // define segments
 const segments = [
-    [0, 30],
+    // [0, 30],
     [30, 58],
     [58, 85],
     [85, 112],
@@ -20,7 +21,7 @@ const segments = [
 ]
 
 const segmentsReversed = [
-    [30, 0],
+    // [30, 0],
     [58, 30],
     [85, 58],
     [111, 85],
@@ -29,9 +30,13 @@ const segmentsReversed = [
 
 // skip initial anim play
 anim.goToAndPlay(138, true)
+anim.pause()
 
 // play first segment right away
-anim.playSegments(segments[0])
+setTimeout(() => {   
+    anim.playSegments(segments[0])
+}, 300)
+
 
 // change slides
 let current = 0
@@ -42,6 +47,7 @@ function nextSlide () {
     anim.playSegments(segments[current], true)
 
     // update content
+
     updateContent(current)
 }
 
@@ -54,52 +60,69 @@ function prevSlide () {
     updateContent(current)
 }
 
+// also capture scroll events, if the cursor is in hero
+$(window).bind('mousewheel', function(event) {
+    if (body.classList.contains('scroll-lock')) {
+        if (event.originalEvent.wheelDelta >= 0) {      
+            if (current > 0)
+                prevSlide()
+        } else {
+            if (current < 3)
+                nextSlide()
+        }
+
+        window.scrollTo(0, 0)
+    }
+})
+
+
+
 // change content
 
 // init content
 slides = [
     {
-        ui: `<button onclick="prevSlide()" disabled>Prev</button>
+        ui: `<button id="btnPrev" disabled></button>
             
             <div class="heading">
-                <h1>MISSIONS</h1>
-                <a href="#content">explore</a>
+                <h1>Missions</h1>
+                <a id="unlock-scroll" href="#content">explore missions</a>
             </div>
             
-            <button onclick="nextSlide()">Next</button>`,
-        content: '<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur quae numquam minus laborum accusantium velit libero quaerat accusamus porro vero facere recusandae obcaecati commodi aliquid, odio earum, officia reiciendis labore.</p><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur quae numquam minus laborum accusantium velit libero quaerat accusamus porro vero facere recusandae obcaecati commodi aliquid, odio earum, officia reiciendis labore.</p><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur quae numquam minus laborum accusantium velit libero quaerat accusamus porro vero facere recusandae obcaecati commodi aliquid, odio earum, officia reiciendis labore.</p><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur quae numquam minus laborum accusantium velit libero quaerat accusamus porro vero facere recusandae obcaecati commodi aliquid, odio earum, officia reiciendis labore.</p>'
+            <button id="btnNext" onclick="nextSlide()"></button>`,
+        content: ``
     },
     {
-        ui: `<button onclick="prevSlide()">Prev</button>
+        ui: `<button id="btnPrev" onclick="prevSlide()"></button>
             
             <div class="heading">
-                <h1>RESEARCH</h1>
-                <a href="#content">explore</a>
+                <h1>Research</h1>
+                <a id="unlock-scroll" href="#content">explore research</a>
             </div>
             
-            <button onclick="nextSlide()">Next</button>`,
+            <button id="btnNext" onclick="nextSlide()"></button>`,
         content: '<h2>lroem ipsum<h2><p>'
     },
     {
-        ui: `<button onclick="prevSlide()">Prev</button>
+        ui: `<button id="btnPrev" onclick="prevSlide()"></button>
             
             <div class="heading">
-                <h1>EDUCATION</h1>
-                <a href="#content">explore</a>
+                <h1>Education</h1>
+                <a id="unlock-scroll" href="#content">explore education</a>
             </div>
             
-            <button onclick="nextSlide()">Next</button>`,
+            <button id="btnNext" onclick="nextSlide()"></button>`,
         content: '<h2>lroem ipsum<h2><p>'
     },
     {
-        ui: `<button onclick="prevSlide()">Prev</button>
+        ui: `<button id="btnPrev" onclick="prevSlide()"></button>
             
             <div class="heading">
                 <h1>CONTACT</h1>
-                <a href="#content">explore</a>
+                <a id="unlock-scroll" href="#content">explore</a>
             </div>
             
-            <button disabled>Next</button>`,
+            <button id="btnNext" disabled"></button>`,
         content: ''
     }
 ]
@@ -107,11 +130,26 @@ slides = [
 const uiElement = document.getElementById('slide-ui')
 const contentElement = document.getElementById('content')
 
-function updateContent (current) {
+function updateContent (slide) {
+    uiElement.classList.add('hidden')
 
-    console.log(current, slides[current])
-    uiElement.innerHTML = slides[current].ui
-    contentElement.innerHTML = slides[current].content
+    setTimeout(() => {
+        uiElement.innerHTML = slides[slide].ui
+        contentElement.innerHTML = slides[slide].content
+    }, 700)
+    
+    
+    setTimeout(() => {
+        uiElement.classList.remove('hidden')
+        
+        // enable scroll if user clicks the explore... button
+        const scrollUnlocker = document.getElementById('unlock-scroll')
+        scrollUnlocker.onclick = () => {
+            body.classList.remove('scroll-lock')  
+        }
+    }, 800 )
+    
+    current = slide
 }
 
 

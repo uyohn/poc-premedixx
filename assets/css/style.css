@@ -1,22 +1,184 @@
-#lottie-container {
-    position: absolute;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,900&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+body.scroll-lock {
+    overflow: hidden;
+}
+
+header {
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    padding-left: 40px;
+    padding-right: 60px;
+
+    z-index: 10;
+}
+
+#hamburger {
+    cursor: pointer;
+}
+
+#main-nav {
+    position: fixed;
+    top: -100%;
     left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    background: #8E0FE8;
-    z-index: -1;
-}
-
-.ui {
-    text-align: center;
-    width: 100%;
-    height: 100vh;
-
-    display: grid;
-    grid-template-columns: 1fr 50% 1fr;
-    grid-template-rows: 1fr;
+    background: rgba(255, 255, 62, 0.95);
+    z-index: 9;
+    display: flex;
     align-items: center;
     justify-content: center;
+    transition: top .2s ease-in-out;
+}
+
+#main-nav.active {
+    top: 0;
+}
+
+#main-nav .container {
+    width: auto;
+    text-align: center;
+}
+
+#main-nav .main-nav-link {
+    font-size: 3em;
+    font-weight: 700;
+    cursor: pointer;
+    display: block;
+}
+
+#main-nav .main-nav-separator {
+    height: 20px;
+    margin: 25px 0;
+}
+
+@media only screen and (max-width: 500px) {
+    header {
+        padding-left: 0;
+        padding-right: 20px;
+        height: 80px;
+    }
+
+    #main-nav .main-nav-link {
+        font-size: 2em;
+    }
+
+    #main-nav .main-nav-separator {
+        margin: 10px 0;
+    }
+}
+
+footer {
+    height: 100px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    background: #f3f3f3;
+    color: #8e8e8e;
+}
+
+
+/* Contact */
+
+footer .contact-links {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+footer .contact-links a {
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+    font-size: .9em;
+}
+
+footer .contact-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+
+    height: 1px;
+    width: 0;
+    background: #8e8e8e;
+
+    transition: width .2s ease-in-out;
+}
+
+footer .contact-links a:hover::after {
+    width: 100%;
+}
+
+footer .contact-links .icon {
+    margin-left: 20px;
+    margin-right: 4px;
+    height: 25px;
+}
+
+
+/* Social */
+
+footer .social-links {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+footer .social-links .icon {
+    margin-left: 20px;
+    height: 25px;
+}
+
+/* TSU */
+
+footer .tsu-link .icon {
+    height: 60px;
+    margin-right: 20px;
+}
+
+
+
+/* TABLET */
+@media only screen and (max-width: 900px) {
+    footer {
+        height: auto;
+        flex-flow: column nowrap;
+    }
+
+    footer .contact-links {
+        flex-flow: column nowrap;
+    }
+
+    footer .contact-links .icon {
+        margin: 40px 0 12px;
+    }
+
+    footer .social-links {
+        margin-top: 50px;
+    }
+
+    footer .social-links .icon {
+        margin: 20px;
+    }
+
+    footer .tsu-link .icon {
+        margin: 20px;
+    }
 }

@@ -1,0 +1,134 @@
+#lottie-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #8E0FE8;
+    z-index: -1;
+    overflow: hidden;
+}
+
+#lottie-container svg {
+    margin-left: -25px;
+    min-width: 1920px!important;
+    min-height: 1080px!important;
+}
+
+.ui {
+    text-align: center;
+    width: 100%;
+    height: 100vh;
+
+    display: grid;
+    grid-template-columns: 1fr 50% 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-content: center;
+
+    transition: opacity .6s ease-in-out;
+}
+
+.ui.hidden {
+    opacity: 0;
+}
+
+.ui h1 {
+    font-size: 5em;
+    color: #ffffff;
+}
+
+.ui a {
+    color: #ffffff;
+    text-transform: uppercase;
+    text-decoration: none;
+    position: relative;
+    font-weight: 500;
+    transition: all .2s ease-in-out;
+}
+
+.ui a:hover {
+    font-size: 1.01em;
+    letter-spacing: 1px;
+}
+
+.ui a::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: #ffffff;
+    position: absolute;
+    bottom: -7px;
+    left: 0;
+    transition: bottom .2s ease-in-out;
+}
+
+.ui a:hover::after {
+    bottom: -9px;
+}
+
+.ui button {
+    background: none;
+    border: none;
+    outline: none;
+    color: #fff;
+    filter: invert(100%);
+    cursor: pointer;
+    height: 60px;
+}
+
+.ui button:disabled {
+    opacity: .5;
+    cursor: default;
+}
+
+.ui #btnPrev,
+.ui #btnNext {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.ui #btnPrev {
+    background-image: url(/img/arrow-left.svg);
+}
+
+.ui #btnNext {
+    background-image: url(/img/arrow-right.svg);
+}
+
+@media only screen and (max-width: 830px) {
+    #lottie-container svg {
+        margin-left: -25px;
+        min-width: 1600px!important;
+        min-height: 900px!important;
+    }
+    
+    .ui h1 {
+        font-size: 3em;
+    }
+
+    .ui a {
+        font-size: .8em;
+    }
+
+    .ui a:hover {
+        font-size: .801em;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .ui h1 {
+        font-size: 2em;
+    }
+
+    .ui a {
+        font-size: .7em;
+    }
+
+    .ui a:hover {
+        font-size: .701em;
+    }
+}
