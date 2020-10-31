@@ -60,20 +60,43 @@ function prevSlide () {
     updateContent(current)
 }
 
-// also capture scroll events, if the cursor is in hero
-$(window).bind('mousewheel', function(event) {
-    if (body.classList.contains('scroll-lock')) {
-        if (event.originalEvent.wheelDelta >= 0) {      
-            if (current > 0)
-                prevSlide()
-        } else {
-            if (current < 3)
-                nextSlide()
+
+//  also capture the mouse scroll if scroll-lock and treshold
+//  instead of scrolling change slide, until scroll unlocked
+//  via "explore ..." button
+let cooldown = 0;
+
+function changeSlide(e){
+    var evt=window.event || e //equalize event object
+    var delta=evt.detail? evt.detail*(-120) : evt.wheelDelta //check for detail first so Opera uses that instead of wheelDelta
+    
+    if (cooldown === 0) {
+        if (body.classList.contains('scroll-lock')) {
+            if (delta >= 0) {      
+                if (current > 0)
+                    prevSlide()
+            } else {
+                if (current < 3)
+                    nextSlide()
+            }
+    
+            window.scrollTo(0, 0)
         }
 
-        window.scrollTo(0, 0)
+        cooldown = 1
+
+        setTimeout(() => {
+            cooldown = 0;
+        }, 200);
     }
-})
+}
+ 
+var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
+ 
+if (document.attachEvent) //if IE (and Opera depending on user setting)
+    document.attachEvent("on"+mousewheelevt, changeSlide)
+else if (document.addEventListener) //WC3 browsers
+    document.addEventListener(mousewheelevt, changeSlide, false)
 
 
 
