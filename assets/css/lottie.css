@@ -132,3 +132,14 @@
         font-size: .701em;
     }
 }
+
+
+
+/* override ui for intro slide */
+
+.ui .intro {
+    position: absolute;
+    top: 45%;
+    left: 0;
+    width: 100%;
+}

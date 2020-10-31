@@ -13,7 +13,7 @@ const anim = lottie.loadAnimation({
 
 // define segments
 const segments = [
-    // [0, 30],
+    [0, 30],
     [30, 58],
     [58, 85],
     [85, 112],
@@ -21,7 +21,7 @@ const segments = [
 ]
 
 const segmentsReversed = [
-    // [30, 0],
+    [30, 0],
     [58, 30],
     [85, 58],
     [111, 85],
@@ -73,10 +73,10 @@ function changeSlide(e){
     if (cooldown === 0) {
         if (body.classList.contains('scroll-lock')) {
             if (delta >= 0) {      
-                if (current > 0)
+                if (current > 1)
                     prevSlide()
             } else {
-                if (current < 3)
+                if (current < 4)
                     nextSlide()
             }
     
@@ -104,6 +104,14 @@ else if (document.addEventListener) //WC3 browsers
 
 // init content
 slides = [
+    {
+        ui: `           
+
+            <div class="intro">
+                <button onclick="nextSlide()">Premedix Academy</btn>
+            </div>`,
+        content: ``
+    },
     {
         ui: `<button id="btnPrev" disabled></button>
             
