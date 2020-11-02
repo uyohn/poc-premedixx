@@ -171,6 +171,11 @@ const contentElement = document.getElementById('content')
 function updateContent (slide) {
     uiElement.classList.add('hidden')
 
+    if (Number(current) === 0)
+        lottieContainer.classList.add('gradient')
+    else
+        lottieContainer.classList.remove('gradient')
+
     setTimeout(() => {
         uiElement.innerHTML = slides[slide].ui
         contentElement.innerHTML = slides[slide].content

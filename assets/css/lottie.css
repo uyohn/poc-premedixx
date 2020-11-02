@@ -8,6 +8,11 @@
     background: #8E0FE8;
     z-index: -1;
     overflow: hidden;
+    transition: background-color 1s ease-in-out;
+}
+
+#lottie-container.gradient {
+    background: red;
 }
 
 #lottie-container svg {
