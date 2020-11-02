@@ -11,6 +11,10 @@ const anim = lottie.loadAnimation({
     name: 'slider'
 })
 
+// skip initial anim play
+anim.goToAndPlay(138, true)
+anim.pause()
+
 // define segments
 const segments = [
     [0, 30],
@@ -28,36 +32,39 @@ const segmentsReversed = [
     [138, 111]
 ]
 
-// skip initial anim play
-anim.goToAndPlay(138, true)
-anim.pause()
-
-// play first segment right away
-setTimeout(() => {   
-    anim.playSegments(segments[0])
-}, 300)
-
 
 // change slides
 let current = 0
 
 function nextSlide () {
     // play the anim
-    current += 1
+    current = Number(current) + 1
     anim.playSegments(segments[current], true)
 
     // update content
-
     updateContent(current)
+
+    // update url param
+    let stateObj = {
+        id: current
+    }
+    window.history.replaceState(stateObj, 'Premedix Academy', `/?slide=${current}`)
 }
 
 function prevSlide () {
     // play the anim
     anim.playSegments(segmentsReversed[current], true)
-    current -= 1
+    current = Number(current) - 1
 
     // update content
     updateContent(current)
+
+    // update url param
+    // update url param
+    let stateObj = {
+        id: current
+    }
+    window.history.replaceState(stateObj, 'Premedix Academy', `/?slide=${current}`)
 }
 
 
@@ -175,9 +182,11 @@ function updateContent (slide) {
         
         // enable scroll if user clicks the explore... button
         const scrollUnlocker = document.getElementById('unlock-scroll')
-        scrollUnlocker.onclick = () => {
-            body.classList.remove('scroll-lock')  
-        }
+        
+        if (scrollUnlocker != null)
+            scrollUnlocker.onclick = () => {
+                body.classList.remove('scroll-lock')  
+            }
     }, 800 )
     
     current = slide
@@ -185,5 +194,29 @@ function updateContent (slide) {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    updateContent(0)
+    // skip initial anim play
+    anim.goToAndPlay(138, true)
+    anim.pause()
+    
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    
+    if (urlParams.has('slide')) {
+        const slide = urlParams.get('slide')
+
+        current = Number(slide)
+        updateContent(slide)
+
+        // play first segment right away
+        setTimeout(() => {   
+            anim.playSegments(segments[slide])
+        }, 300)
+    } else {
+        updateContent(0)
+
+        // play first segment right away
+        setTimeout(() => {   
+            anim.playSegments(segments[0])
+        }, 300)
+    }
 }, false);

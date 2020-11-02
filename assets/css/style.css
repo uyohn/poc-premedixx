@@ -60,6 +60,8 @@ header {
     font-weight: 700;
     cursor: pointer;
     display: block;
+    text-decoration: none;
+    color: #000;
 }
 
 #main-nav .main-nav-separator {
