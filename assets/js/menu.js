@@ -12,15 +12,6 @@ const jumpEducation = document.getElementById('jump-education')
 const jumpContact   = document.getElementById('jump-contact')
 
 jumpMissions.onclick = () => {
-    updateContent(0)
-    anim.playSegments(segments[0], true)
-    nav.classList.remove('active')
-
-    window.scrollTo(0, 0)
-    body.classList.add('scroll-lock')
-}
-
-jumpResearch.onclick = () => {
     updateContent(1)
     anim.playSegments(segments[1], true)
     nav.classList.remove('active')
@@ -29,7 +20,7 @@ jumpResearch.onclick = () => {
     body.classList.add('scroll-lock')
 }
 
-jumpEducation.onclick = () => {
+jumpResearch.onclick = () => {
     updateContent(2)
     anim.playSegments(segments[2], true)
     nav.classList.remove('active')
@@ -38,9 +29,18 @@ jumpEducation.onclick = () => {
     body.classList.add('scroll-lock')
 }
 
-jumpContact.onclick = () => {
+jumpEducation.onclick = () => {
     updateContent(3)
     anim.playSegments(segments[3], true)
+    nav.classList.remove('active')
+
+    window.scrollTo(0, 0)
+    body.classList.add('scroll-lock')
+}
+
+jumpContact.onclick = () => {
+    updateContent(4)
+    anim.playSegments(segments[4], true)
     nav.classList.remove('active')
     
     window.scrollTo(0, 0)
