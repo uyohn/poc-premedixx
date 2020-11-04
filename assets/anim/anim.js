@@ -167,14 +167,18 @@ slides = [
 
 const uiElement = document.getElementById('slide-ui')
 const contentElement = document.getElementById('content')
+const headerElement = document.getElementById('main-header')
 
 function updateContent (slide) {
     uiElement.classList.add('hidden')
 
-    if (Number(current) === 0)
+    if (Number(current) === 0) {
         lottieContainer.classList.add('gradient')
-    else
+        headerElement.classList.add('hidden')
+    } else {
         lottieContainer.classList.remove('gradient')
+        headerElement.classList.remove('hidden')
+    }
 
     setTimeout(() => {
         uiElement.innerHTML = slides[slide].ui
